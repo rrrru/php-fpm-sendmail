@@ -7,7 +7,7 @@ RUN apt-get update && \
 RUN echo "sendmail_path=/usr/sbin/sendmail -t -i" >> /usr/local/etc/php/conf.d/sendmail.ini 
 
 RUN docker-php-ext-install pdo_mysql && \
-    docker-php-ext-install zip && \
+    docker-php-ext-install zip
     
 
 RUN sed -i '/#!\/bin\/sh/aservice sendmail restart' /usr/local/bin/docker-php-entrypoint && \
