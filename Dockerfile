@@ -13,7 +13,8 @@ RUN echo "sendmail_path=/usr/sbin/sendmail -t -i" >> /usr/local/etc/php/conf.d/s
 RUN pecl install imagick-3.4.4 && \
     docker-php-ext-enable imagick
 
-RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr && \
+RUN docker-php-ext-install -j$(nproc) mysqli && \
+    docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr && \
     docker-php-ext-install pdo_mysql zip mbstring exif mbstring
 
 RUN sed -i '/#!\/bin\/sh/aservice sendmail restart' /usr/local/bin/docker-php-entrypoint && \
