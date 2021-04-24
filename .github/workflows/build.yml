@@ -30,3 +30,13 @@ jobs:
         push: true
         tags: |
           ghcr.io/${{ env.REPOSITORY_LOWERCASE }}:latest
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: Dockerfile-nginx
+        platforms: linux/amd64
+        push: true
+        tags: |
+          ghcr.io/${{ env.REPOSITORY_LOWERCASE }}/nginx:latest
